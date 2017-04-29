@@ -29196,9 +29196,9 @@ module.exports = Home;
 },{"react":157}],161:[function(require,module,exports){
 $ = jQuery = require('jquery'); // nice little trick to say that both $ and jQuery resolve to require('jquery'). We need to require this because boostrap expects jQuery to be in the global namespace.
 var React = require('react');
-var Home = require('./components/homepage.js');
-var About = require('./components/about/aboutPage');
-var Header = require('./components/common/header');
+var Home = require('./components/homepage.jsx');
+var About = require('./components/about/aboutPage.jsx');
+var Header = require('./components/common/header.jsx');
 
 
 (function(win) {
@@ -29233,4 +29233,4 @@ var Header = require('./components/common/header');
 
 })(window);
 
-},{"./components/about/aboutPage":158,"./components/common/header":159,"./components/homepage.js":160,"jquery":1,"react":157}]},{},[161]);
+},{"./components/about/aboutPage.jsx":158,"./components/common/header.jsx":159,"./components/homepage.jsx":160,"jquery":1,"react":157}]},{},[161]);

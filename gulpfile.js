@@ -15,7 +15,7 @@ var config = {
     devBaseUrl: 'http://localhost',
     paths: {
         html: './src/*.html',
-        js: './src/**/*.js',
+        js: './src/**/*.js*',
         images: './src/images/*',
         css: [ // we need these paths because that's where node stores the files for boostrap
             'node_modules/bootstrap/dist/css/bootstrap.min.css',
