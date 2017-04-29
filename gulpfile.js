@@ -7,6 +7,7 @@ var browserify = require('browserify'); // For bundling javascript
 var reactify = require('reactify'); // Transforms React JSX to JS
 var source = require('vinyl-source-stream') // Use conventional text streams with Gulp
 var concat = require('gulp-concat'); // it concatenates files
+var lint = require('gulp-eslint'); // lint JS files, including JSX
 
 //gulpfile configurations:
 var config = {
@@ -64,11 +65,19 @@ gulp.task('css', function() {
         .pipe(gulp.dest(config.paths.dist + '/css')); // drop that file in the css directory
 });
 
+gulp.task('lint', function() {
+    return gulp.src(config.paths.js)
+        .pipe(lint({
+            config: 'eslint.config.json'
+        }))
+        .pipe(lint.format());
+})
+
 //task to watch files so that every time we make a change, gulp knows about it and it reloads the browser
 gulp.task('watch', function() {
     gulp.watch(config.paths.html, ['html']);
-    gulp.watch(config.paths.js, ['js']); // watch our latst javascript changes
+    gulp.watch(config.paths.js, ['js', 'lint']); // watch our latst javascript changes
 });
 
 //default task to make it easy to do all development:
-gulp.task('default', ['html', 'js', 'css', 'open', 'watch']);
+gulp.task('default', ['html', 'js', 'css', 'lint', 'open', 'watch']);
