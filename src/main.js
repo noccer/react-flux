@@ -2,6 +2,7 @@ $ = jQuery = require('jquery'); // nice little trick to say that both $ and jQue
 var React = require('react');
 var Home = require('./components/homepage.js');
 var About = require('./components/about/aboutPage');
+var Header = require('./components/common/header');
 
 
 (function(win) {
@@ -18,7 +19,8 @@ var About = require('./components/about/aboutPage');
 
             return (
                 <div>
-                    <Child/>
+                    <Header />
+                    <Child />
                 </div>
             );
         }
@@ -31,6 +33,6 @@ var About = require('./components/about/aboutPage');
 
     win.addEventListener('hashchange', render);
 
-    React.render(<Home/>, document.getElementById('app'));
+    React.render(<App/>, document.getElementById('app'));
 
 })(window);

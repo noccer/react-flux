@@ -16,6 +16,7 @@ var config = {
     paths: {
         html: './src/*.html',
         js: './src/**/*.js',
+        images: './src/images/*',
         css: [ // we need these paths because that's where node stores the files for boostrap
             'node_modules/bootstrap/dist/css/bootstrap.min.css',
             'node_modules/boostrap/dist/css/bootstrap-theme.min.css' // boostrap-theme 'pulls it together' ???
@@ -65,6 +66,15 @@ gulp.task('css', function() {
         .pipe(gulp.dest(config.paths.dist + '/css')); // drop that file in the css directory
 });
 
+gulp.task('images', function() {
+    gulp.src(config.paths.images)
+        .pipe(gulp.dest(config.paths.dist + '/images'))
+        .pipe(connect.reload());
+
+    gulp.src('./src/favicon.ico')
+        .pipe(gulp.dest(config.paths.dist));
+});
+
 gulp.task('lint', function() {
     return gulp.src(config.paths.js)
         .pipe(lint({
@@ -80,4 +90,4 @@ gulp.task('watch', function() {
 });
 
 //default task to make it easy to do all development:
-gulp.task('default', ['html', 'js', 'css', 'lint', 'open', 'watch']);
+gulp.task('default', ['html', 'js', 'css', 'images', 'lint', 'open', 'watch']);
