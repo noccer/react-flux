@@ -29119,6 +29119,34 @@ module.exports = require('./lib/React');
 
 var React = require('react');
 
+var About = React.createClass({displayName: "About",
+    render: function() {
+        return (
+            React.createElement("div", null, 
+                React.createElement("h1", null, "About"), 
+                React.createElement("p", null, "This application uses the following technologies:", 
+                    React.createElement("ul", null, 
+                        React.createElement("li", null, "React"), 
+                        React.createElement("li", null, "React Router"), 
+                        React.createElement("li", null, "Flux"), 
+                        React.createElement("li", null, "Node"), 
+                        React.createElement("li", null, "Gulp"), 
+                        React.createElement("li", null, "Browserify"), 
+                        React.createElement("li", null, "Bootstrap")
+                    )
+                )
+            )
+        );
+    }
+});
+
+module.exports = About;
+
+},{"react":157}],159:[function(require,module,exports){
+"use strict";
+
+var React = require('react');
+
 var Home = React.createClass({displayName: "Home",
     render: function() {
         return (
@@ -29132,11 +29160,38 @@ var Home = React.createClass({displayName: "Home",
 
 module.exports = Home;
 
-},{"react":157}],159:[function(require,module,exports){
+},{"react":157}],160:[function(require,module,exports){
 $ = jQuery = require('jquery'); // nice little trick to say that both $ and jQuery resolve to require('jquery'). We need to require this because boostrap expects jQuery to be in the global namespace.
 var React = require('react');
 var Home = require('./components/homepage.js');
+var About = require('./components/about/aboutPage');
+
+var App = React.createClass({displayName: "App",
+    render: function() {
+        // 'use strict';
+        var Child; // which child we want to render
+
+        switch(this.props.route) {
+            case 'about': Child = About; break; // if the URL is /about
+            default: Child = Home;
+        }
+
+        return (
+            React.createElement("div", null, 
+                React.createElement(Child, null)
+            )
+        );
+    }
+});
+
+var render = function() { // an abstraction that sits above the home page
+    "use strict";
+    var route = window.location.hash.substr(1);
+    React.render(React.createElement(App, {route: route}), document.getElementById('app'));
+};
+
+window.addEventListener('hashchange', render);
 
 React.render(React.createElement(Home, null), document.getElementById('app'));
 
-},{"./components/homepage.js":158,"jquery":1,"react":157}]},{},[159]);
+},{"./components/about/aboutPage":158,"./components/homepage.js":159,"jquery":1,"react":157}]},{},[160]);
