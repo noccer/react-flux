@@ -6,6 +6,7 @@ var open = require('gulp-open'); // Open a URL in a web browser
 var browserify = require('browserify'); // For bundling javascript
 var reactify = require('reactify'); // Transforms React JSX to JS
 var source = require('vinyl-source-stream') // Use conventional text streams with Gulp
+var concat = require('gulp-concat'); // it concatenates files
 
 //gulpfile configurations:
 var config = {
@@ -14,6 +15,10 @@ var config = {
     paths: {
         html: './src/*.html',
         js: './src/**/*.js',
+        css: [ // we need these paths because that's where node stores the files for boostrap
+            'node_modules/bootstrap/dist/css/bootstrap.min.css',
+            'node_modules/boostrap/dist/css/bootstrap-theme.min.css' // boostrap-theme 'pulls it together' ???
+        ],
         dist: './dist',
         mainJs: './src/main.js'
     }
@@ -53,6 +58,12 @@ gulp.task('js', function() {
         .pipe(connect.reload()) // make sure that we see the latest javascript in the browser
 })
 
+gulp.task('css', function() {
+    gulp.src(config.paths.css)
+        .pipe(concat('bundle.css')) // call it bundle.css, a single bundled css file to save http requests
+        .pipe(gulp.dest(config.paths.dist + '/css')); // drop that file in the css directory
+});
+
 //task to watch files so that every time we make a change, gulp knows about it and it reloads the browser
 gulp.task('watch', function() {
     gulp.watch(config.paths.html, ['html']);
@@ -60,4 +71,4 @@ gulp.task('watch', function() {
 });
 
 //default task to make it easy to do all development:
-gulp.task('default', ['html', 'js', 'open', 'watch']);
+gulp.task('default', ['html', 'js', 'css', 'open', 'watch']);
