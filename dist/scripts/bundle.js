@@ -44723,13 +44723,17 @@ var Router = require('react-router');
 var DefaultRoute = Router.DefaultRoute; // reference to default route. This will be used so that we can declare what route should load when the page loads without any other segments in the URL after the initial '/'
 var Route = Router.Route; // Route component which is used to define our routes
 var NotFoundRoute = Router.NotFoundRoute;
+var Redirect = Router.Redirect;
 
 var routes = (
     React.createElement(Route, {name: "app", path: "/", handler: require('./components/app.jsx')}, 
         React.createElement(DefaultRoute, {handler: require('./components/homePage.jsx')}), 
         React.createElement(Route, {name: "authors", handler: require('./components/authors/authorPage.jsx')}), 
         React.createElement(Route, {name: "about", handler: require('./components/about/aboutPage.jsx')}), 
-        React.createElement(NotFoundRoute, {handler: require('./components/404.jsx')})
+        React.createElement(NotFoundRoute, {handler: require('./components/404.jsx')}), 
+        React.createElement(Redirect, {from: "about-us", to: "about"}), 
+        React.createElement(Redirect, {from: "awthurs", to: "authors"}), 
+        React.createElement(Redirect, {from: "about/*", to: "about"})
     )
 );
 
