@@ -1,40 +1,9 @@
-$ = jQuery = require('jquery'); // nice little trick to say that both $ and jQuery resolve to require('jquery'). We need to require this because boostrap expects jQuery to be in the global namespace.
+"use strict";
+
 var React = require('react');
-var Home = require('./components/homepage.jsx');
-var Authors = require('./components/authors/authorPage.jsx');
-var About = require('./components/about/aboutPage.jsx');
-var Header = require('./components/common/header.jsx');
+var Router = require('react-router');
+var routes = require('./routes');
 
-
-(function(win) {
-    "use strict";
-    var App = React.createClass({
-        render: function() {
-
-            var Child; // which child we want to render
-
-            switch(this.props.route) {
-                case 'about': Child = About; break; // if the URL is /about
-                case 'authors': Child = Authors; break;
-                default: Child = Home;
-            }
-
-            return (
-                <div>
-                    <Header />
-                    <Child />
-                </div>
-            );
-        }
-    });
-
-    var render = function() { // an abstraction that sits above the home page
-        var route = win.location.hash.substr(1);
-        React.render(<App route={route} />, document.getElementById('app'));
-    };
-
-    win.addEventListener('hashchange', render);
-
-    React.render(<App/>, document.getElementById('app'));
-
-})(window);
+Router.run(routes, function(Handler) {
+    React.render(<Handler/>, document.getElementById('app'));
+});
