@@ -1,6 +1,7 @@
 $ = jQuery = require('jquery'); // nice little trick to say that both $ and jQuery resolve to require('jquery'). We need to require this because boostrap expects jQuery to be in the global namespace.
 var React = require('react');
 var Home = require('./components/homepage.jsx');
+var Authors = require('./components/authors/authorPage.jsx');
 var About = require('./components/about/aboutPage.jsx');
 var Header = require('./components/common/header.jsx');
 
@@ -14,6 +15,7 @@ var Header = require('./components/common/header.jsx');
 
             switch(this.props.route) {
                 case 'about': Child = About; break; // if the URL is /about
+                case 'authors': Child = Authors; break;
                 default: Child = Home;
             }
 

@@ -17,6 +17,11 @@ var Header = React.createClass({
                             </a>
                         </li>
                         <li>
+                            <a href="/#authors">
+                                Authors
+                            </a>
+                        </li>
+                        <li>
                             <a href="/#about">
                                 About
                             </a>
