@@ -11,6 +11,12 @@ var About = React.createClass({
             } else {
                 callback(); // allows the transition to occur. If we didnt call this, the page would not be allowed to transition after the user accepted the prompt.
             }
+        },
+        willTransitionFrom: function(transition, component) {
+            // logic to determine whether this page can be transitioned to
+            if (!confirm("Are you sure you want to leave a page that\'s this exciting?")) {
+                transition.about();
+            }
         }
     },
     render: function() {
