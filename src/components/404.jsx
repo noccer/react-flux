@@ -11,8 +11,8 @@ var NotFoundPage = React.createClass({
                 <p>Whoops! Sorry, there is nothing to see here.</p>
                 <p><Link to="app">Back to Home</Link></p>
             </div>
-        )
+        );
     }
-})
+});
 
 module.exports = NotFoundPage;
