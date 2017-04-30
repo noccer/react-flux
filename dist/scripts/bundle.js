@@ -41573,22 +41573,8 @@ module.exports = About;
 "use strict";
 
 var React = require('react');
-var AuthorApi = require('../../api/authorApi.js');
 
-var Authors = React.createClass({displayName: "Authors",
-
-    getInitialState: function() {
-        return {
-            authors: []
-        };
-    },
-
-    componentWillMount: function() {
-        this.setState({
-            authors: AuthorApi.getAllAuthors()
-        });
-    },
-
+var AuthorList = React.createClass({displayName: "AuthorList",
     render: function() {
         var createAuthorRow = function(author) {
             return (
@@ -41607,15 +41593,13 @@ var Authors = React.createClass({displayName: "Authors",
 
         return (
             React.createElement("div", null, 
-                React.createElement("h1", null, "Authors"), 
-
                 React.createElement("table", {className: "table"}, 
                     React.createElement("thead", null, 
                         React.createElement("th", null, "ID"), 
                         React.createElement("th", null, "Name")
                     ), 
                     React.createElement("tbody", null, 
-                        this.state.authors.map(createAuthorRow, this)
+                        this.props.authors.map(createAuthorRow, this)
                     )
                 )
             )
@@ -41623,9 +41607,45 @@ var Authors = React.createClass({displayName: "Authors",
     }
 });
 
+module.exports = AuthorList;
+
+},{"react":158}],163:[function(require,module,exports){
+// this page displays a list of our authors
+"use strict";
+
+var React = require('react');
+var AuthorApi = require('../../api/authorApi.js');
+var AuthorList = require('./authorList.jsx');
+
+var Authors = React.createClass({displayName: "Authors",
+
+    getInitialState: function() {
+        return {
+            authors: []
+        };
+    },
+
+    componentDidMount: function() {
+        if (this.isMounted()) {
+            this.setState({
+                authors: AuthorApi.getAllAuthors()
+            });
+        }
+    },
+
+    render: function() {
+        return (
+            React.createElement("div", null, 
+                React.createElement("h1", null, "Authors"), 
+                React.createElement(AuthorList, {authors: this.state.authors})
+            )
+        );
+    }
+});
+
 module.exports = Authors;
 
-},{"../../api/authorApi.js":159,"react":158}],163:[function(require,module,exports){
+},{"../../api/authorApi.js":159,"./authorList.jsx":162,"react":158}],164:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -41663,7 +41683,7 @@ var Header = React.createClass({displayName: "Header",
 
 module.exports = Header;
 
-},{"react":158}],164:[function(require,module,exports){
+},{"react":158}],165:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -41681,7 +41701,7 @@ var Home = React.createClass({displayName: "Home",
 
 module.exports = Home;
 
-},{"react":158}],165:[function(require,module,exports){
+},{"react":158}],166:[function(require,module,exports){
 $ = jQuery = require('jquery'); // nice little trick to say that both $ and jQuery resolve to require('jquery'). We need to require this because boostrap expects jQuery to be in the global namespace.
 var React = require('react');
 var Home = require('./components/homepage.jsx');
@@ -41723,4 +41743,4 @@ var Header = require('./components/common/header.jsx');
 
 })(window);
 
-},{"./components/about/aboutPage.jsx":161,"./components/authors/authorPage.jsx":162,"./components/common/header.jsx":163,"./components/homepage.jsx":164,"jquery":1,"react":158}]},{},[165]);
+},{"./components/about/aboutPage.jsx":161,"./components/authors/authorPage.jsx":163,"./components/common/header.jsx":164,"./components/homepage.jsx":165,"jquery":1,"react":158}]},{},[166]);
