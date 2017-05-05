@@ -1,6 +1,7 @@
 "use strict";
 
 var React = require('react');
+var Input = require('../common/textInput');
 
 var AuthorForm = React.createClass({
     render: function() {
