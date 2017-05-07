@@ -19,7 +19,8 @@ var config = {
         images: './src/images/*',
         css: [ // we need these paths because that's where node stores the files for boostrap
             'node_modules/bootstrap/dist/css/bootstrap.min.css',
-            'node_modules/boostrap/dist/css/bootstrap-theme.min.css' // boostrap-theme 'pulls it together' ???
+            'node_modules/boostrap/dist/css/bootstrap-theme.min.css', // boostrap-theme 'pulls it together' ???
+            'node_modules/toastr/toastr.css'
         ],
         dist: './dist',
         mainJs: './src/main.js'
