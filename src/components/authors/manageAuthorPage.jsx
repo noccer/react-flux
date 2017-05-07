@@ -2,6 +2,7 @@
 
 var React = require('react');
 var AuthorForm = require('./authorForm.jsx');
+var AuthorApi = require('../../api/AuthorApi');
 
 var ManageAuthorPage = React.createClass({
     // top-level components are the best place to manage state
@@ -25,9 +26,17 @@ var ManageAuthorPage = React.createClass({
         });
     },
 
+    saveAuthor: function(event) {
+        event.preventDefault();
+        AuthorApi.saveAuthor(this.state.author);
+    },
+
     render: function() {
         return (
-            <AuthorForm author={this.state.author} onChange={this.setAuthorState}/>
+            <AuthorForm
+                author={this.state.author}
+                onChange={this.setAuthorState}
+                onSave={this.saveAuthor} />
         );
     }
 });
