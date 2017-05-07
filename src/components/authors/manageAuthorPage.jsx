@@ -1,10 +1,15 @@
 "use strict";
 
 var React = require('react');
+var Router = require('react-router');
 var AuthorForm = require('./authorForm.jsx');
 var AuthorApi = require('../../api/AuthorApi');
 
 var ManageAuthorPage = React.createClass({
+    mixins: [ //to programatically rediect the user. mixins are just defined as an array and by convention must be called 'mixins'
+        Router.Navigation
+    ],
+
     // top-level components are the best place to manage state
     getInitialState: function() {
         return {
@@ -29,6 +34,7 @@ var ManageAuthorPage = React.createClass({
     saveAuthor: function(event) {
         event.preventDefault();
         AuthorApi.saveAuthor(this.state.author);
+        this.transitionTo('authors');
     },
 
     render: function() {
